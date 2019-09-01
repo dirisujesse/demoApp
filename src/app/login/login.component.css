@@ -1,0 +1,51 @@
+.section {
+  height: 100vh;
+}
+
+.segment {
+  width: 40em !important;
+  margin: 0 auto !important;
+  margin-top: 10% !important;
+}
+
+.card-block {
+  padding: 0 !important;
+  -webkit-app-region: drag !important;
+  -webkit-user-drag: element !important;
+}
+
+.card .card-block .card-title {
+  padding: 1em !important;
+  width: inherit;
+  margin: 0 !important;
+  border: 0 !important;
+  height: inherit !important;
+  background-color: #1A4C72 !important;
+  color: #FFF !important;
+  font-size: large;
+}
+
+.card .card-block .card-text {
+  padding: 0.2em 1.2em !important;
+}
+
+.card .card-block .card-text .input {
+  width: 100%;
+  height: inherit;
+}
+
+
+@media screen and (max-width: 400px) {
+  .segment {
+    width: 98% !important;
+    margin: auto !important;
+    margin-top: 25% !important;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 800px) {
+  .segment {
+    width: 70% !important;
+    margin-top: 20% !important;
+  }
+}

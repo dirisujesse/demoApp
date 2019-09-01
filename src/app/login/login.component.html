@@ -1,0 +1,45 @@
+<div *ngIf="loading" class="progress loop">
+  <progress></progress>
+</div>
+<div class="section">
+  <div class="card segment">
+    <div class="card-block">
+      <h3 class="card-title">
+        {{user_type?.toUpperCase()}} LOGIN
+      </h3>
+      <div class="card-text">
+        <p *ngIf="message" style="text-align: center">
+          {{message}}
+        </p>
+        <form class="form">
+          <label>
+            Account Type
+          </label>
+          <section class="form-block select">
+            <select [ngModelOptions]="{standalone: true}" [(ngModel)]="user_type">
+              <option value="" disabled="true" [selected]="true">Select Status</option>
+              <option [value]="'staff'">Staff</option>
+              <option [value]="'admin'">Administrator</option>
+              <option [value]="'guest'">Guest</option>
+            </select>
+          </section>
+          <section class="form-block">
+            <input [ngModelOptions]="{standalone: true}" class="input" [(ngModel)]="email" type="email" placeholder="Email">
+          </section>
+          <section class="form-block">
+            <input [ngModelOptions]="{standalone: true}" class="input" [(ngModel)]="password" type="password"
+              placeholder="Password">
+          </section>
+        </form>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button (click)="login(email, password, user_type)" [disabled]="loading" type="submit" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner spinner-inverse spinner-sm">
+          Logging in...
+        </span>
+        Login
+      </button>
+    </div>
+  </div>
+</div>

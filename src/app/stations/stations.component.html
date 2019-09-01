@@ -1,0 +1,104 @@
+<clr-main-container>
+  <clr-header class="header-3">
+    <div class="branding">
+      <a class="nav-link">
+        <clr-icon shape="clock"></clr-icon>
+        <span class="title">DEMO DASHBOARD</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a class="nav-link">
+        <span class="nav-text">{{time}}</span>
+      </a>
+      <a class="nav-link">
+        <span (click)="displayCache()" class="nav-text">Manage Local Data</span>
+      </a>
+      <a *ngIf="service?.getEmail()" class="nav-link">
+        <span class="nav-text">{{service?.getEmail()}}</span>
+      </a>
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="user" class="has-badge"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="password_unchanged = true" clrDropdownItem>Change Password</a>
+          <a (click)="service.logout()" clrDropdownItem>Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-header>
+  <div class="content-container">
+    <main class="content-area" style="margin: 1em">
+      <div *ngIf="loading" class="progress loop"><progress></progress></div>
+      <div class="row">
+        <div class="col-xs-12">
+          <clr-datagrid id="datagrid">
+            <clr-dg-column [clrDgField]="'name'">Filling Station Name</clr-dg-column>
+            <clr-dg-column [clrDgField]="'company'">Parent Company</clr-dg-column>
+            <clr-dg-column [clrDgField]="'manager'">Manager</clr-dg-column>
+            <clr-dg-column [clrDgField]="'store'">Storage Capacity</clr-dg-column>
+            <clr-dg-column [clrDgField]="'pumps'">Pumps</clr-dg-column>
+            <clr-dg-column [clrDgField]="'attendants'">Attendants</clr-dg-column>
+            <clr-dg-column [clrDgField]="'location'">Location</clr-dg-column>
+            <clr-dg-column [clrDgField]="'licenseDate'">Licensing Date</clr-dg-column>
+            <clr-dg-column [clrDgField]="'Rating'">Rating</clr-dg-column>
+
+            <clr-dg-row *clrDgItems="
+          let clockin of stations;
+          let even = even;
+          let odd = odd;
+          trackBy: tracker
+        ">
+              <clr-dg-cell>
+                {{ clockin?.name | titlecase }}
+              </clr-dg-cell>
+              <clr-dg-cell #id [ngClass]="{ odd: odd, even: even }">{{ clockin?.company | titlecase }}
+              </clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">{{ clockin?.manager | titlecase }}
+              </clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">
+                {{clockin?.store | number}}</clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">{{ clockin?.pumps | number }}
+              </clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">{{ clockin?.attendants | number }}
+              </clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">
+                {{ clockin?.location | titlecase }}</clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">
+                {{ clockin?.licenseDate | date:"mediumDate" }}</clr-dg-cell>
+              <clr-dg-cell [ngClass]="{ odd: odd, even: even }">{{ clockin?.rating }}
+              </clr-dg-cell>
+            </clr-dg-row>
+
+            <clr-dg-footer>
+              <!-- <a>Download Data</a> -->
+              {{ pagination.firstItem + 1 }} -
+              {{ pagination.lastItem + 1 }} of
+              {{ pagination.totalItems }} records
+              <clr-dg-pagination #pagination [clrDgPageSize]="50"></clr-dg-pagination>
+            </clr-dg-footer>
+          </clr-datagrid>
+        </div>
+      </div>
+    </main>
+    <clr-vertical-nav [clr-nav-level]="1" [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed">
+      <a clrVerticalNavLink routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="user"></clr-icon>
+        Accounts
+      </a>
+      <a clrVerticalNavLink routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="map-marker"></clr-icon>
+        Locations
+      </a>
+      <a clrVerticalNavLink routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="list"></clr-icon>
+        Reports
+      </a>
+      <a clrVerticalNavLink routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="alarm-clock"></clr-icon>
+        Stations
+      </a>
+    </clr-vertical-nav>
+  </div>
+</clr-main-container>
