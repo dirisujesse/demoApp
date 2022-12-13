@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod --aot --build-optimizer",
-    "build:git": "ng build --prod --aot --output-path docs --base-href https://dirisujesse.github.io/demoApp/",
+    "start": "node init && ng serve",
+    "build": "node init && ng build --prod --aot --build-optimizer",
+    "build:git": "node init && ng build --prod --aot --output-path docs --base-href https://dirisujesse.github.io/demoApp/",
     "startx": "ng serve --disable-host-check=true",
     "test": "ng test",
     "lint": "ng lint",
